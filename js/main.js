@@ -192,8 +192,8 @@ function gameloop() {
 
       //did we hit the ground?
       if (box.bottom >= $("#land").offset().top) {
-            playerDead();
-            return;
+            position = 360;
+            // return;
       }
 
       //have they tried to escape through the ceiling? :o
@@ -519,9 +519,10 @@ function updatePipes() {
       //add a new pipe (top height + bottom height  + pipeheight == flyArea) and put it in our tracker
       var padding = 8;
       var constraint = flyArea - pipeheight - (padding * 2); //double padding (for top and bottom)
-      var topheight = Math.floor(((0.9 - pipelevel * 0.18) * constraint) + padding); //add lower padding
+      var topheight = Math.floor(((1 - pipelevel * 0.18) * constraint) + padding); //add lower padding
       var bottomheight = (flyArea - pipeheight) - topheight;
-      var newpipe = $('<div class="pipe animated"><div class="candy" style="top: ' + topheight + 'px;"></div></div>'); //<div class="pipe_lower" style="height: ' + bottomheight + 'px;"></div>
+      
+      var newpipe = pipelevel_count%2==0?$('<div class="pipe animated"><div class="candy" style="display:none"></div></div>'):$('<div class="pipe animated"><div class="candy" style="top: ' + topheight + 'px;"></div></div>'); //<div class="pipe_lower" style="height: ' + bottomheight + 'px;"></div>
       $("#flyarea").append(newpipe);
       pipes.push(newpipe);
 }
